@@ -1,11 +1,21 @@
+import 'package:image_picker/image_picker.dart';
+
 class Student {
   int id;
+  PickedFile? image;
   String name;
   String sex;
   String homeTown;
   Type type;
   Block block;
-  Student({required this.id,required this.name,required this.sex,required this.homeTown,required this.type,required this.block});
+  Student(
+      {required this.id,
+      required this.image,
+      required this.name,
+      required this.sex,
+      required this.homeTown,
+      required this.type,
+      required this.block});
 }
 
 class Type {
@@ -47,6 +57,7 @@ List<Type> dataTypeList = [
 List<Student> dataStudentList = [
   Student(
     id: 0,
+    image: PickedFile('../images/images.png'),
     name: 'Nguyễn Thị Mai',
     sex: 'Nữ',
     homeTown: 'Đội Cấn / Ba Đình / Hà Nội',
@@ -55,6 +66,7 @@ List<Student> dataStudentList = [
   ),
   Student(
     id: 1,
+    image: PickedFile('../images/images.png'),
     name: 'Nguyễn Văn Lang',
     sex: 'Nam',
     homeTown: 'Đội Cấn / Ba Đình / Hà Nội',
@@ -63,6 +75,7 @@ List<Student> dataStudentList = [
   ),
   Student(
     id: 2,
+    image: PickedFile('../images/images.png'),
     name: 'Nguyễn Thị Mai',
     sex: 'Nữ',
     homeTown: 'Đội Cấn / Ba Đình / Hà Nội',
@@ -71,6 +84,7 @@ List<Student> dataStudentList = [
   ),
   Student(
     id: 3,
+    image: PickedFile('../images/images.png'),
     name: 'Nguyễn Văn Lang',
     sex: 'Nam',
     homeTown: 'Đội Cấn / Ba Đình / Hà Nội',
@@ -79,6 +93,7 @@ List<Student> dataStudentList = [
   ),
   Student(
     id: 4,
+    image: PickedFile('../images/images.png'),
     name: 'Nguyễn Thị Mai',
     sex: 'Nữ',
     homeTown: 'Đội Cấn / Ba Đình / Hà Nội',
@@ -87,6 +102,7 @@ List<Student> dataStudentList = [
   ),
   Student(
     id: 5,
+    image: PickedFile('../images/images.png'),
     name: 'Nguyễn Văn Lang',
     sex: 'Nam',
     homeTown: 'Đội Cấn / Ba Đình / Hà Nội',
@@ -95,6 +111,7 @@ List<Student> dataStudentList = [
   ),
   Student(
     id: 6,
+    image: PickedFile('../images/images.png'),
     name: 'Nguyễn Thị Mai',
     sex: 'Nữ',
     homeTown: 'Đội Cấn / Ba Đình / Hà Nội',
@@ -103,6 +120,7 @@ List<Student> dataStudentList = [
   ),
   Student(
     id: 7,
+    image: PickedFile('../images/images.png'),
     name: 'Nguyễn Văn Lang',
     sex: 'Nam',
     homeTown: 'Đội Cấn / Ba Đình / Hà Nội',
@@ -111,6 +129,7 @@ List<Student> dataStudentList = [
   ),
   Student(
     id: 8,
+    image: PickedFile('../images/images.png'),
     name: 'Nguyễn Thị Mai',
     sex: 'Nữ',
     homeTown: 'Đội Cấn / Ba Đình / Hà Nội',
@@ -119,6 +138,7 @@ List<Student> dataStudentList = [
   ),
   Student(
     id: 9,
+    image: PickedFile('../images/images.png'),
     name: 'Nguyễn Văn Lang',
     sex: 'Nam',
     homeTown: 'Đội Cấn / Ba Đình / Hà Nội',
@@ -127,6 +147,7 @@ List<Student> dataStudentList = [
   ),
   Student(
     id: 10,
+    image: PickedFile('../images/images.png'),
     name: 'Nguyễn Thị Mai',
     sex: 'Nữ',
     homeTown: 'Đội Cấn / Ba Đình / Hà Nội',
@@ -135,6 +156,7 @@ List<Student> dataStudentList = [
   ),
   Student(
     id: 11,
+    image: PickedFile('../images/images.png'),
     name: 'Nguyễn Văn Lang',
     sex: 'Nam',
     homeTown: 'Đội Cấn / Ba Đình / Hà Nội',
@@ -143,6 +165,7 @@ List<Student> dataStudentList = [
   ),
   Student(
     id: 12,
+    image: PickedFile('../images/images.png'),
     name: 'Nguyễn Thị Mai',
     sex: 'Nữ',
     homeTown: 'Đội Cấn / Ba Đình / Hà Nội',
@@ -151,6 +174,7 @@ List<Student> dataStudentList = [
   ),
   Student(
     id: 13,
+    image: PickedFile('../images/images.png'),
     name: 'Nguyễn Văn Lang',
     sex: 'Nam',
     homeTown: 'Đội Cấn / Ba Đình / Hà Nội',
@@ -159,6 +183,7 @@ List<Student> dataStudentList = [
   ),
   Student(
     id: 14,
+    image: PickedFile('../images/images.png'),
     name: 'Nguyễn Thị Mai',
     sex: 'Nữ',
     homeTown: 'Đội Cấn / Ba Đình / Hà Nội',
@@ -167,6 +192,7 @@ List<Student> dataStudentList = [
   ),
   Student(
     id: 15,
+    image: PickedFile('../images/images.png'),
     name: 'Nguyễn Văn Lang',
     sex: 'Nam',
     homeTown: 'Đội Cấn / Ba Đình / Hà Nội',
@@ -175,6 +201,7 @@ List<Student> dataStudentList = [
   ),
   Student(
     id: 16,
+    image: PickedFile('../images/images.png'),
     name: 'Nguyễn Thị Mai',
     sex: 'Nữ',
     homeTown: 'Đội Cấn / Ba Đình / Hà Nội',
@@ -183,6 +210,7 @@ List<Student> dataStudentList = [
   ),
   Student(
     id: 17,
+    image: PickedFile('../images/images.png'),
     name: 'Nguyễn Văn Lang',
     sex: 'Nam',
     homeTown: 'Đội Cấn / Ba Đình / Hà Nội',

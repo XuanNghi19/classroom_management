@@ -1,4 +1,6 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'data.dart';
 
 class DisplayStudentDetail extends StatefulWidget {
@@ -51,10 +53,13 @@ class _DisplayStudentDetailState extends State<DisplayStudentDetail> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    SizedBox(
-                      height: 70,
+                   SizedBox(
+                      height: 100,
                       width: 70,
-                      child: Image.asset('images/images.png'),
+                      child: Image(
+                        fit: BoxFit.cover,
+                        image: FileImage(File(student.image!.path)),
+                      ),
                     ),
                     const SizedBox(width: 30),
                     Column(
