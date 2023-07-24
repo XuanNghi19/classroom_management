@@ -53,7 +53,8 @@ class _DisplayStudentListState extends State<DisplayStudentList> {
                 children: [
                   TableRow(
                     decoration: BoxDecoration(
-                        color: Theme.of(context).primaryColor.withOpacity(0.8)),
+                      color: Theme.of(context).primaryColor.withOpacity(0.8),
+                    ),
                     children: const [
                       SizedBox(
                         height: 50,
@@ -101,8 +102,8 @@ class _DisplayStudentListState extends State<DisplayStudentList> {
                     dataList.studentList.length,
                     (index) => TableRow(
                       decoration: BoxDecoration(
-                          color:
-                              Theme.of(context).primaryColor.withOpacity(0.25)),
+                        color: Theme.of(context).primaryColor.withOpacity(0.25),
+                      ),
                       children: [
                         SizedBox(
                           child: Center(
@@ -111,10 +112,11 @@ class _DisplayStudentListState extends State<DisplayStudentList> {
                             style: const TextStyle(fontSize: 13),
                           )),
                         ),
-                        SizedBox(
-                          height: 60,
-                          child: Center(
-                            child: Image.asset('images/images.png'),
+                        const SizedBox(
+                          height: 100,
+                          child: Image(
+                            fit: BoxFit.cover,
+                            image: AssetImage('images/images.png'),
                           ),
                         ),
                         SizedBox(
@@ -143,7 +145,8 @@ class _DisplayStudentListState extends State<DisplayStudentList> {
                                       context: context,
                                       builder: (context) => AlertDialog(
                                         title: const Text('Xác nhận xóa'),
-                                        content: const Text('Đồng ý xóa học sinh này!'),
+                                        content: const Text(
+                                            'Đồng ý xóa học sinh này!'),
                                         actions: [
                                           TextButton(
                                             onPressed: () =>

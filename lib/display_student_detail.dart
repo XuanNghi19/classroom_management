@@ -53,19 +53,23 @@ class _DisplayStudentDetailState extends State<DisplayStudentDetail> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    const SizedBox(
+                    Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.black),
+                        borderRadius: BorderRadius.circular(5),
+                        image: const DecorationImage(
+                          image: AssetImage('images/images.png'),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
                       height: 100,
                       width: 70,
-                      child: Image(
-                        fit: BoxFit.cover,
-                        image: AssetImage('images/images.png'),
-                      ),
                     ),
-                    const SizedBox(width: 30),
+                    const SizedBox(width: 15),
                     Column(
                       children: [
                         SizedBox(
-                          width: 150,
+                          width: 165,
                           child: Form(
                             key: _formKey,
                             child: Column(
