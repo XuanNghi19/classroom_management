@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'data.dart';
 import 'display_student_detail.dart';
@@ -10,6 +11,8 @@ class DisplayStudentList extends StatefulWidget {
 }
 
 class _DisplayStudentListState extends State<DisplayStudentList> {
+  File defaultImage = File('images/images.png');
+
   @override
   Widget build(BuildContext context) {
     final dataList = widget.dataList;
@@ -91,10 +94,11 @@ class _DisplayStudentListState extends State<DisplayStudentList> {
                       SizedBox(
                         height: 50,
                         child: Center(
-                            child: Text(
-                          'Thao tác',
-                          style: TextStyle(fontSize: 13),
-                        )),
+                          child: Text(
+                            'Thao tác',
+                            style: TextStyle(fontSize: 13),
+                          ),
+                        ),
                       ),
                     ],
                   ),
@@ -112,11 +116,14 @@ class _DisplayStudentListState extends State<DisplayStudentList> {
                             style: const TextStyle(fontSize: 13),
                           )),
                         ),
-                        const SizedBox(
+                        SizedBox(
                           height: 100,
                           child: Image(
                             fit: BoxFit.cover,
-                            image: AssetImage('images/images.png'),
+                            image: dataList.studentList[index].imageFile == null
+                                ? FileImage(
+                                    dataList.studentList[index].imageFile!)
+                                : FileImage(defaultImage),
                           ),
                         ),
                         SizedBox(

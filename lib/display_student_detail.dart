@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import 'data.dart';
 
 class DisplayStudentDetail extends StatefulWidget {
@@ -12,6 +11,8 @@ class DisplayStudentDetail extends StatefulWidget {
 
 class _DisplayStudentDetailState extends State<DisplayStudentDetail> {
   final _formKey = GlobalKey<FormState>();
+  File defaultImage = File('images/images.png');
+
   List<DropdownMenuItem<Type>> types = dataTypeList
       .map(
         (type) => DropdownMenuItem(
@@ -20,6 +21,7 @@ class _DisplayStudentDetailState extends State<DisplayStudentDetail> {
         ),
       )
       .toList();
+
   @override
   Widget build(BuildContext context) {
     Student student = widget.student;
@@ -57,8 +59,8 @@ class _DisplayStudentDetailState extends State<DisplayStudentDetail> {
                       decoration: BoxDecoration(
                         border: Border.all(color: Colors.black),
                         borderRadius: BorderRadius.circular(5),
-                        image: const DecorationImage(
-                          image: AssetImage('images/images.png'),
+                        image: DecorationImage(
+                          image: student.imageFile == null ? FileImage(student.imageFile!) : FileImage(defaultImage),
                           fit: BoxFit.cover,
                         ),
                       ),
