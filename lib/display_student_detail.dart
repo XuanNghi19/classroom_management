@@ -53,12 +53,12 @@ class _DisplayStudentDetailState extends State<DisplayStudentDetail> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                   SizedBox(
+                    const SizedBox(
                       height: 100,
                       width: 70,
                       child: Image(
                         fit: BoxFit.cover,
-                        image: FileImage(File(student.image!.path)),
+                        image: AssetImage('images/images.png'),
                       ),
                     ),
                     const SizedBox(width: 30),
