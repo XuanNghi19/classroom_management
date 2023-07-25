@@ -1,10 +1,52 @@
 import 'package:flutter/material.dart';
 import 'display_class_list.dart';
-import 'data.dart';
+import 'block.dart';
+import 'group.dart';
+import 'student.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'modulus.dart';
 
-void main() {
-  getStudent();
-  getType();
+Future<void> main() async {
+  await Hive.initFlutter();
+
+  Hive.registerAdapter(BlockAdapter());
+  final localBlockData = await Hive.openBox<Block>('localBlockData');
+  final localGroupData = await Hive.openBox<Group>('localGroupData');
+  final localStudentData = await Hive.openBox<Student>('localStudentData');
+
+  localBlockData.clear();
+  localGroupData.clear();
+  localStudentData.clear();
+
+  localBlockData.isEmpty ? {
+    localBlockData.addAll(dataBlock),
+  } : {
+    dataBlock.addAll(localBlockData.values),
+    debugPrint(dataBlock.toString()),
+  };
+  
+  localGroupData.isEmpty ? {
+    localGroupData.addAll(dataGroup),
+  } : {
+    dataGroup.addAll(localGroupData.values),
+    debugPrint(dataGroup.toString()),
+  };
+  
+  localStudentData.isEmpty ? {
+    localStudentData.addAll(dataStudent),
+  } : {
+    dataStudent.addAll(localStudentData.values),
+    debugPrint(dataStudent.toString()),
+  };
+
+  localBlockData.close;
+  localGroupData.close;
+  localStudentData.close;
+
+  setStudent();
+  setType();
+  setBlock();
+
   runApp(const MyApp());
 }
 

@@ -1,21 +1,20 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
-import 'data.dart';
+import 'display_data.dart';
+import 'modulus.dart';
 import 'display_student_detail.dart';
 
 class DisplayStudentList extends StatefulWidget {
-  const DisplayStudentList({super.key, required this.dataList});
-  final Type dataList;
+  const DisplayStudentList({super.key, required this.displayTypeDraft});
+  final DisplayType displayTypeDraft;
   @override
   State<DisplayStudentList> createState() => _DisplayStudentListState();
 }
 
 class _DisplayStudentListState extends State<DisplayStudentList> {
-  File defaultImage = File('images/images.png');
 
   @override
   Widget build(BuildContext context) {
-    final dataList = widget.dataList;
+    final displayTypeDraft = widget.displayTypeDraft;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).primaryColor,
@@ -34,7 +33,7 @@ class _DisplayStudentListState extends State<DisplayStudentList> {
         child: Column(
           children: [
             Text(
-              'Danh sách học sinh lớp ${dataList.name}',
+              'Danh sách học sinh lớp ${displayTypeDraft.name}',
               style: const TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.w500,
@@ -103,7 +102,7 @@ class _DisplayStudentListState extends State<DisplayStudentList> {
                     ],
                   ),
                   ...List<TableRow>.generate(
-                    dataList.studentList.length,
+                    displayTypeDraft.studentList.length,
                     (index) => TableRow(
                       decoration: BoxDecoration(
                         color: Theme.of(context).primaryColor.withOpacity(0.25),
@@ -120,16 +119,16 @@ class _DisplayStudentListState extends State<DisplayStudentList> {
                           height: 100,
                           child: Image(
                             fit: BoxFit.cover,
-                            image: dataList.studentList[index].imageFile == null
-                                ? FileImage(
-                                    dataList.studentList[index].imageFile!)
-                                : FileImage(defaultImage),
+                            image: displayTypeDraft.studentList[index].imageFile == null
+                                ? MemoryImage(
+                                    displayTypeDraft.studentList[index].imageFile!)
+                                : MemoryImage(defaultImage),
                           ),
                         ),
                         SizedBox(
                           child: Center(
                             child: Text(
-                              dataList.studentList[index].name,
+                              displayTypeDraft.studentList[index].name,
                               style: const TextStyle(fontSize: 13),
                             ),
                           ),
@@ -137,7 +136,7 @@ class _DisplayStudentListState extends State<DisplayStudentList> {
                         SizedBox(
                           child: Center(
                             child: Text(
-                              dataList.studentList[index].sex,
+                              displayTypeDraft.studentList[index].sex,
                               style: const TextStyle(fontSize: 13),
                             ),
                           ),
@@ -165,9 +164,7 @@ class _DisplayStudentListState extends State<DisplayStudentList> {
                                               Navigator.pop(context),
                                               setState(
                                                 () {
-                                                  dataList.removeStudent(
-                                                    dataList.studentList[index],
-                                                  );
+                                                  removeStudentFromListType(displayTypeDraft.studentList, displayTypeDraft.studentList[index].id);
                                                 },
                                               ),
                                             },
@@ -187,7 +184,7 @@ class _DisplayStudentListState extends State<DisplayStudentList> {
                                       MaterialPageRoute(
                                         builder: (context) =>
                                             DisplayStudentDetail(
-                                          student: dataList.studentList[index],
+                                          student: displayTypeDraft.studentList[index],
                                         ),
                                       ),
                                     );

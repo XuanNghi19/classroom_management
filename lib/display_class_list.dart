@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'data.dart';
+import 'display_data.dart';
 import 'display_student_list.dart';
 
 class DisplayClassList extends StatefulWidget {
@@ -11,7 +11,7 @@ class DisplayClassList extends StatefulWidget {
 
 class _DisplayClassListState extends State<DisplayClassList> {
   final List<bool> _isExpended =
-      List.generate(blockList.length, (index) => false);
+      List.generate(displayBlock.length, (index) => false);
 
   @override
   Widget build(BuildContext context) {
@@ -37,9 +37,9 @@ class _DisplayClassListState extends State<DisplayClassList> {
         height: double.infinity,
         width: double.infinity,
         child: ListView.builder(
-          itemCount: blockList.length,
+          itemCount: displayBlock.length,
           itemBuilder: (context, index) {
-            final dataBlock = blockList[index];
+            final dataBlock = displayBlock[index];
             return Column(
               children: [
                 GestureDetector(
@@ -77,7 +77,7 @@ class _DisplayClassListState extends State<DisplayClassList> {
                             context,
                             MaterialPageRoute(
                               builder: (context) => DisplayStudentList(
-                                dataList: dataBlock.typeList[i],
+                                displayTypeDraft: dataBlock.typeList[index],
                               ),
                             ),
                           );

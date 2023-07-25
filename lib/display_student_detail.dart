@@ -1,6 +1,8 @@
-import 'dart:io';
+import 'display_data.dart';
 import 'package:flutter/material.dart';
-import 'data.dart';
+import 'student.dart';
+import 'modulus.dart';
+import 'group.dart';
 
 class DisplayStudentDetail extends StatefulWidget {
   const DisplayStudentDetail({super.key, required this.student});
@@ -11,9 +13,8 @@ class DisplayStudentDetail extends StatefulWidget {
 
 class _DisplayStudentDetailState extends State<DisplayStudentDetail> {
   final _formKey = GlobalKey<FormState>();
-  File defaultImage = File('images/images.png');
 
-  List<DropdownMenuItem<Type>> types = dataTypeList
+  List<DropdownMenuItem<Group>> types = dataGroup
       .map(
         (type) => DropdownMenuItem(
           value: type,
@@ -60,7 +61,7 @@ class _DisplayStudentDetailState extends State<DisplayStudentDetail> {
                         border: Border.all(color: Colors.black),
                         borderRadius: BorderRadius.circular(5),
                         image: DecorationImage(
-                          image: student.imageFile == null ? FileImage(student.imageFile!) : FileImage(defaultImage),
+                          image: student.imageFile != null ? MemoryImage(student.imageFile!) : MemoryImage(defaultImage),
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -129,10 +130,10 @@ class _DisplayStudentDetailState extends State<DisplayStudentDetail> {
                                   ),
                                 ),
                                 DropdownButtonFormField(
-                                  value: student.type,
+                                  value: student.group,
                                   items: types,
                                   onSaved: (value) {
-                                    student.type = value!;
+                                    student.group = value!;
                                   },
                                   onChanged: (value) {},
                                 ),
@@ -184,8 +185,8 @@ class _DisplayStudentDetailState extends State<DisplayStudentDetail> {
                             onPressed: () {
                               Navigator.pushNamed(context, 'DisplayClassList');
                               _formKey.currentState!.save();
-                              getStudent();
-                              getType();
+                              setStudent();
+                              setType();
                             },
                             child: const Text('Có'),
                           ),
