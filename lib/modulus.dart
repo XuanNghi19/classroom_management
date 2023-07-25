@@ -1,3 +1,6 @@
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:scm/group.dart';
+
 import 'student.dart';
 import 'display_data.dart';
 import 'block.dart';
@@ -5,26 +8,26 @@ import 'block.dart';
 void setStudent() {
   Map<String, List<Student>> studentMap = {};
   for (Student student in dataStudent) {
-    studentMap.putIfAbsent(student.group.name, () => []);
-    studentMap[student.group.name]!.add(student);
+    studentMap.putIfAbsent(student.name, () => []);
+    studentMap[student.name]!.add(student);
   }
 
-  for (DisplayType type in displayType) {
-    type.studentList.clear();
-    type.studentList.addAll(studentMap[type.name]!);
+  for (DisplayGroup group in displayGroup) {
+    group.studentList.clear();
+    group.studentList.addAll(studentMap[group.name]!);
   }
 }
 
-void setType() {
-  Map<String, List<DisplayType>> typeMap = {};
-  for (DisplayType type in displayType) {
-    typeMap.putIfAbsent(type.block.name, () => []);
-    typeMap[type.block.name]!.add(type);
+void setGroup() {
+  Map<String, List<DisplayGroup>> groupList = {};
+  for (DisplayGroup type in displayGroup) {
+    groupList.putIfAbsent(type.block.name, () => []);
+    groupList[type.block.name]!.add(type);
   }
 
   for (DisplayBlock block in displayBlock) {
-    block.typeList.clear();
-    block.typeList.addAll(typeMap[block.name]!);
+    block.groupList.clear();
+    block.groupList.addAll(groupList[block.name]!);
   }
 }
 
@@ -33,9 +36,27 @@ void setBlock() {
     dataBlock.length,
     (index) => DisplayBlock(
       name: dataBlock[index].name,
-      typeList: <DisplayType>[],
+      groupList: <DisplayGroup>[],
     ),
   );
+}
+
+Future<void> setLocalBlockData () async {
+  final localBlockData = await Hive.openBox<Block>('localBlockData');
+  localBlockData.addAll(dataBlock);
+  localBlockData.close();
+}
+
+Future<void> setlocalGroupData () async {
+  final localGroupData = await Hive.openBox<Group>('localGroupData');
+  localGroupData.addAll(dataGroup);
+  localGroupData.close();
+}
+
+Future<void> setlocalStudentData () async {
+  final localStudentData = await Hive.openBox<Student>('localStudentData');
+  localStudentData.addAll(dataStudent);
+  localStudentData.close();
 }
 
 void removeStudentFromListType(List<Student> studentList, int id) {

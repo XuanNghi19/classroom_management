@@ -1,20 +1,27 @@
+import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'display_data.dart';
 import 'modulus.dart';
 import 'display_student_detail.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 class DisplayStudentList extends StatefulWidget {
-  const DisplayStudentList({super.key, required this.displayTypeDraft});
-  final DisplayType displayTypeDraft;
+  const DisplayStudentList({super.key, required this.displayGroupDraft});
+  final DisplayGroup displayGroupDraft;
   @override
   State<DisplayStudentList> createState() => _DisplayStudentListState();
 }
 
 class _DisplayStudentListState extends State<DisplayStudentList> {
 
+  final boxDefault = Hive.box('boxDefault');
+  
   @override
   Widget build(BuildContext context) {
-    final displayTypeDraft = widget.displayTypeDraft;
+  
+    Uint8List defaultImage = boxDefault.get('imageProfileDefaut');
+    final displayGroupDraft = widget.displayGroupDraft;
+  
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).primaryColor,
@@ -33,7 +40,7 @@ class _DisplayStudentListState extends State<DisplayStudentList> {
         child: Column(
           children: [
             Text(
-              'Danh sách học sinh lớp ${displayTypeDraft.name}',
+              'Danh sách học sinh lớp ${displayGroupDraft.name}',
               style: const TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.w500,
@@ -102,7 +109,7 @@ class _DisplayStudentListState extends State<DisplayStudentList> {
                     ],
                   ),
                   ...List<TableRow>.generate(
-                    displayTypeDraft.studentList.length,
+                    displayGroupDraft.studentList.length,
                     (index) => TableRow(
                       decoration: BoxDecoration(
                         color: Theme.of(context).primaryColor.withOpacity(0.25),
@@ -119,16 +126,16 @@ class _DisplayStudentListState extends State<DisplayStudentList> {
                           height: 100,
                           child: Image(
                             fit: BoxFit.cover,
-                            image: displayTypeDraft.studentList[index].imageFile == null
+                            image: displayGroupDraft.studentList[index].imageFile != null
                                 ? MemoryImage(
-                                    displayTypeDraft.studentList[index].imageFile!)
+                                    displayGroupDraft.studentList[index].imageFile!)
                                 : MemoryImage(defaultImage),
                           ),
                         ),
                         SizedBox(
                           child: Center(
                             child: Text(
-                              displayTypeDraft.studentList[index].name,
+                              displayGroupDraft.studentList[index].name,
                               style: const TextStyle(fontSize: 13),
                             ),
                           ),
@@ -136,7 +143,7 @@ class _DisplayStudentListState extends State<DisplayStudentList> {
                         SizedBox(
                           child: Center(
                             child: Text(
-                              displayTypeDraft.studentList[index].sex,
+                              displayGroupDraft.studentList[index].sex,
                               style: const TextStyle(fontSize: 13),
                             ),
                           ),
@@ -164,7 +171,7 @@ class _DisplayStudentListState extends State<DisplayStudentList> {
                                               Navigator.pop(context),
                                               setState(
                                                 () {
-                                                  removeStudentFromListType(displayTypeDraft.studentList, displayTypeDraft.studentList[index].id);
+                                                  removeStudentFromListType(displayGroupDraft.studentList, displayGroupDraft.studentList[index].id);
                                                 },
                                               ),
                                             },
@@ -184,7 +191,7 @@ class _DisplayStudentListState extends State<DisplayStudentList> {
                                       MaterialPageRoute(
                                         builder: (context) =>
                                             DisplayStudentDetail(
-                                          student: displayTypeDraft.studentList[index],
+                                          student: displayGroupDraft.studentList[index],
                                         ),
                                       ),
                                     );

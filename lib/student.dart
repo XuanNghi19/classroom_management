@@ -25,10 +25,10 @@ class Student {
   String homeTown;
 
   @HiveField(5)
-  Group group;
+  String group;
 
   @HiveField(6)
-  Block block;
+  String block;
 
   Student({
     required this.id,
@@ -52,8 +52,8 @@ List<Student> dataStudent = [
     name: 'Nguyễn Thị Mai',
     sex: 'Nữ',
     homeTown: 'Đội Cấn / Ba Đình / Hà Nội',
-    group: dataGroup[0],
-    block: dataBlock[0],
+    group: dataGroup[0].name,
+    block: dataBlock[0].name,
   ),
   Student(
     id: 1,
@@ -61,8 +61,8 @@ List<Student> dataStudent = [
     name: 'Nguyễn Văn Lang',
     sex: 'Nam',
     homeTown: 'Đội Cấn / Ba Đình / Hà Nội',
-    group: dataGroup[0],
-    block: dataBlock[0],
+    group: dataGroup[0].name,
+    block: dataBlock[0].name,
   ),
   Student(
     id: 2,
@@ -70,8 +70,8 @@ List<Student> dataStudent = [
     name: 'Nguyễn Thị Mai',
     sex: 'Nữ',
     homeTown: 'Đội Cấn / Ba Đình / Hà Nội',
-    group: dataGroup[1],
-    block: dataBlock[0],
+    group: dataGroup[1].name,
+    block: dataBlock[0].name,
   ),
   Student(
     id: 3,
@@ -79,8 +79,8 @@ List<Student> dataStudent = [
     name: 'Nguyễn Văn Lang',
     sex: 'Nam',
     homeTown: 'Đội Cấn / Ba Đình / Hà Nội',
-    group: dataGroup[1],
-    block: dataBlock[0],
+    group: dataGroup[1].name,
+    block: dataBlock[0].name,
   ),
   Student(
     id: 4,
@@ -88,8 +88,8 @@ List<Student> dataStudent = [
     name: 'Nguyễn Thị Mai',
     sex: 'Nữ',
     homeTown: 'Đội Cấn / Ba Đình / Hà Nội',
-    group: dataGroup[2],
-    block: dataBlock[0],
+    group: dataGroup[2].name,
+    block: dataBlock[0].name,
   ),
   Student(
     id: 5,
@@ -97,8 +97,8 @@ List<Student> dataStudent = [
     name: 'Nguyễn Văn Lang',
     sex: 'Nam',
     homeTown: 'Đội Cấn / Ba Đình / Hà Nội',
-    group: dataGroup[2],
-    block: dataBlock[0],
+    group: dataGroup[2].name,
+    block: dataBlock[0].name,
   ),
   Student(
     id: 6,
@@ -106,8 +106,8 @@ List<Student> dataStudent = [
     name: 'Nguyễn Thị Mai',
     sex: 'Nữ',
     homeTown: 'Đội Cấn / Ba Đình / Hà Nội',
-    group: dataGroup[3],
-    block: dataBlock[1],
+    group: dataGroup[3].name,
+    block: dataBlock[1].name,
   ),
   Student(
     id: 7,
@@ -115,8 +115,8 @@ List<Student> dataStudent = [
     name: 'Nguyễn Văn Lang',
     sex: 'Nam',
     homeTown: 'Đội Cấn / Ba Đình / Hà Nội',
-    group: dataGroup[3],
-    block: dataBlock[1],
+    group: dataGroup[3].name,
+    block: dataBlock[1].name,
   ),
   Student(
     id: 8,
@@ -124,8 +124,8 @@ List<Student> dataStudent = [
     name: 'Nguyễn Thị Mai',
     sex: 'Nữ',
     homeTown: 'Đội Cấn / Ba Đình / Hà Nội',
-    group: dataGroup[4],
-    block: dataBlock[1],
+    group: dataGroup[4].name,
+    block: dataBlock[1].name,
   ),
   Student(
     id: 9,
@@ -133,8 +133,8 @@ List<Student> dataStudent = [
     name: 'Nguyễn Văn Lang',
     sex: 'Nam',
     homeTown: 'Đội Cấn / Ba Đình / Hà Nội',
-    group: dataGroup[4],
-    block: dataBlock[1],
+    group: dataGroup[4].name,
+    block: dataBlock[1].name,
   ),
   Student(
     id: 10,
@@ -142,8 +142,8 @@ List<Student> dataStudent = [
     name: 'Nguyễn Thị Mai',
     sex: 'Nữ',
     homeTown: 'Đội Cấn / Ba Đình / Hà Nội',
-    group: dataGroup[5],
-    block: dataBlock[1],
+    group: dataGroup[5].name,
+    block: dataBlock[1].name,
   ),
   Student(
     id: 11,
@@ -151,8 +151,8 @@ List<Student> dataStudent = [
     name: 'Nguyễn Văn Lang',
     sex: 'Nam',
     homeTown: 'Đội Cấn / Ba Đình / Hà Nội',
-    group: dataGroup[5],
-    block: dataBlock[1],
+    group: dataGroup[5].name,
+    block: dataBlock[1].name,
   ),
   Student(
     id: 12,
@@ -160,8 +160,8 @@ List<Student> dataStudent = [
     name: 'Nguyễn Thị Mai',
     sex: 'Nữ',
     homeTown: 'Đội Cấn / Ba Đình / Hà Nội',
-    group: dataGroup[6],
-    block: dataBlock[2],
+    group: dataGroup[6].name,
+    block: dataBlock[2].name,
   ),
   Student(
     id: 13,
@@ -169,8 +169,8 @@ List<Student> dataStudent = [
     name: 'Nguyễn Văn Lang',
     sex: 'Nam',
     homeTown: 'Đội Cấn / Ba Đình / Hà Nội',
-    group: dataGroup[6],
-    block: dataBlock[2],
+    group: dataGroup[6].name,
+    block: dataBlock[2].name,
   ),
   Student(
     id: 14,
@@ -178,8 +178,8 @@ List<Student> dataStudent = [
     name: 'Nguyễn Thị Mai',
     sex: 'Nữ',
     homeTown: 'Đội Cấn / Ba Đình / Hà Nội',
-    group: dataGroup[7],
-    block: dataBlock[2],
+    group: dataGroup[7].name,
+    block: dataBlock[2].name,
   ),
   Student(
     id: 15,
@@ -187,8 +187,8 @@ List<Student> dataStudent = [
     name: 'Nguyễn Văn Lang',
     sex: 'Nam',
     homeTown: 'Đội Cấn / Ba Đình / Hà Nội',
-    group: dataGroup[7],
-    block: dataBlock[2],
+    group: dataGroup[7].name,
+    block: dataBlock[2].name,
   ),
   Student(
     id: 16,
@@ -196,8 +196,8 @@ List<Student> dataStudent = [
     name: 'Nguyễn Thị Mai',
     sex: 'Nữ',
     homeTown: 'Đội Cấn / Ba Đình / Hà Nội',
-    group: dataGroup[8],
-    block: dataBlock[2],
+    group: dataGroup[8].name,
+    block: dataBlock[2].name,
   ),
   Student(
     id: 17,
@@ -205,7 +205,7 @@ List<Student> dataStudent = [
     name: 'Nguyễn Văn Lang',
     sex: 'Nam',
     homeTown: 'Đội Cấn / Ba Đình / Hà Nội',
-    group: dataGroup[8],
-    block: dataBlock[2],
+    group: dataGroup[8].name,
+    block: dataBlock[2].name,
   ),
 ];

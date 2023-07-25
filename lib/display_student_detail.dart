@@ -1,5 +1,7 @@
-import 'display_data.dart';
+import 'dart:typed_data';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:scm/display_data.dart';
 import 'student.dart';
 import 'modulus.dart';
 import 'group.dart';
@@ -13,19 +15,22 @@ class DisplayStudentDetail extends StatefulWidget {
 
 class _DisplayStudentDetailState extends State<DisplayStudentDetail> {
   final _formKey = GlobalKey<FormState>();
+  final boxDefault = Hive.box('boxDefault');
 
-  List<DropdownMenuItem<Group>> types = dataGroup
-      .map(
-        (type) => DropdownMenuItem(
-          value: type,
-          child: Text(type.name),
-        ),
-      )
-      .toList();
+
 
   @override
   Widget build(BuildContext context) {
+    List<DropdownMenuItem<String>> groups = dataGroup.map((group) {
+      return DropdownMenuItem(
+        value: group.name,
+        child: Text(group.name),
+      );
+    }).toList();
+
     Student student = widget.student;
+    Uint8List defaultImage = boxDefault.get('imageProfileDefaut');
+
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: AppBar(
@@ -61,7 +66,9 @@ class _DisplayStudentDetailState extends State<DisplayStudentDetail> {
                         border: Border.all(color: Colors.black),
                         borderRadius: BorderRadius.circular(5),
                         image: DecorationImage(
-                          image: student.imageFile != null ? MemoryImage(student.imageFile!) : MemoryImage(defaultImage),
+                          image: student.imageFile != null
+                              ? MemoryImage(student.imageFile!)
+                              : MemoryImage(defaultImage),
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -129,9 +136,10 @@ class _DisplayStudentDetailState extends State<DisplayStudentDetail> {
                                     fontStyle: FontStyle.italic,
                                   ),
                                 ),
+                                
                                 DropdownButtonFormField(
                                   value: student.group,
-                                  items: types,
+                                  items: groups,
                                   onSaved: (value) {
                                     student.group = value!;
                                   },
@@ -186,7 +194,8 @@ class _DisplayStudentDetailState extends State<DisplayStudentDetail> {
                               Navigator.pushNamed(context, 'DisplayClassList');
                               _formKey.currentState!.save();
                               setStudent();
-                              setType();
+                              setGroup();
+                              setlocalStudentData();
                             },
                             child: const Text('Có'),
                           ),

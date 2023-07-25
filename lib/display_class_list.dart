@@ -39,7 +39,7 @@ class _DisplayClassListState extends State<DisplayClassList> {
         child: ListView.builder(
           itemCount: displayBlock.length,
           itemBuilder: (context, index) {
-            final dataBlock = displayBlock[index];
+            final data = displayBlock[index];
             return Column(
               children: [
                 GestureDetector(
@@ -60,7 +60,7 @@ class _DisplayClassListState extends State<DisplayClassList> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('Khối ${dataBlock.name}'),
+                        Text('Khối ${data.name}'),
                         const Icon(Icons.expand_more),
                       ],
                     ),
@@ -70,14 +70,16 @@ class _DisplayClassListState extends State<DisplayClassList> {
                 if (_isExpended[index])
                   Column(
                     children: List.generate(
-                      dataBlock.typeList.length,
+                      data.groupList.length,
                       (i) => GestureDetector(
                         onTap: () {
+                          // debugPrint('///////////');
+                          // debugPrint(data.groupList[i].name);
                           Navigator.push(
                             context,
                             MaterialPageRoute(
                               builder: (context) => DisplayStudentList(
-                                displayTypeDraft: dataBlock.typeList[index],
+                                displayGroupDraft: data.groupList[i],
                               ),
                             ),
                           );
@@ -90,7 +92,7 @@ class _DisplayClassListState extends State<DisplayClassList> {
                           margin: const EdgeInsets.only(bottom: 5),
                           color:
                               Theme.of(context).primaryColor.withOpacity(0.5),
-                          child: Text('Lớp ${dataBlock.typeList[i].name}'),
+                          child: Text('Lớp ${data.groupList[i].name}'),
                         ),
                       ),
                     ),

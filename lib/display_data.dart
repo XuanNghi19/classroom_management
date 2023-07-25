@@ -1,33 +1,29 @@
-import 'dart:io';
-import 'dart:typed_data';
 import 'student.dart';
 import 'block.dart';
 import 'group.dart';
 
-Uint8List defaultImage = File('images/images.png').readAsBytesSync();
-
 class DisplayBlock {
   String name;
-  List<DisplayType> typeList;
-  DisplayBlock({required this.name, required this.typeList});
+  List<DisplayGroup> groupList;
+  DisplayBlock({required this.name, required this.groupList});
 }
 
-class DisplayType {
+class DisplayGroup {
   String name;
   Block block;
   List<Student> studentList;
-  DisplayType({required this.name, required this.block ,required this.studentList});
+  DisplayGroup({required this.name, required this.block ,required this.studentList});
 }
 
 List<DisplayBlock> displayBlock = List.generate(
   dataBlock.length,
   (index) => DisplayBlock(
     name: dataBlock[index].name,
-    typeList: <DisplayType>[],
+    groupList: <DisplayGroup>[],
   ),
 );
 
-List<DisplayType> displayType = List.generate(
+List<DisplayGroup> displayGroup = List.generate(
   dataGroup.length,
-  (index) => DisplayType(name: dataGroup[index].name, block: dataGroup[index].block, studentList: <Student>[]),
+  (index) => DisplayGroup(name: dataGroup[index].name, block: dataGroup[index].block, studentList: <Student>[]),
 );

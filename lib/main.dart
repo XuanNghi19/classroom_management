@@ -5,47 +5,84 @@ import 'group.dart';
 import 'student.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'modulus.dart';
+import 'package:flutter/services.dart' show rootBundle;
 
 Future<void> main() async {
   await Hive.initFlutter();
 
+  final imageProfileDefaut = (await rootBundle.load('images/images.png')).buffer.asUint8List();
+  final boxDefault = await Hive.openBox('boxDefault');
+  boxDefault.put('imageProfileDefaut', imageProfileDefaut);
+
   Hive.registerAdapter(BlockAdapter());
   final localBlockData = await Hive.openBox<Block>('localBlockData');
+
+  Hive.registerAdapter(GroupAdapter());
   final localGroupData = await Hive.openBox<Group>('localGroupData');
+
+  Hive.registerAdapter(StudentAdapter());
   final localStudentData = await Hive.openBox<Student>('localStudentData');
 
-  localBlockData.clear();
-  localGroupData.clear();
-  localStudentData.clear();
+  // localBlockData.clear();
+  // localGroupData.clear();
+  // localStudentData.clear();
 
   localBlockData.isEmpty ? {
     localBlockData.addAll(dataBlock),
   } : {
+    dataBlock.clear(),
     dataBlock.addAll(localBlockData.values),
-    debugPrint(dataBlock.toString()),
+    
+    for(Block block in dataBlock) {
+      debugPrint(block.name),
+    }
   };
+  debugPrint('______________');
   
   localGroupData.isEmpty ? {
     localGroupData.addAll(dataGroup),
   } : {
+    dataGroup.clear(),
     dataGroup.addAll(localGroupData.values),
-    debugPrint(dataGroup.toString()),
+    for(Group group in dataGroup) {
+      debugPrint(group.name),
+    }
   };
+  debugPrint('______________');
   
   localStudentData.isEmpty ? {
     localStudentData.addAll(dataStudent),
   } : {
+    dataStudent.clear(),
     dataStudent.addAll(localStudentData.values),
-    debugPrint(dataStudent.toString()),
+    for(Student student in dataStudent) {
+      debugPrint(student.name),
+    }
   };
+  debugPrint('*********************');
 
   localBlockData.close;
   localGroupData.close;
   localStudentData.close;
 
-  setStudent();
-  setType();
   setBlock();
+  setStudent();
+  setGroup();
+
+  // for(DisplayBlock block in displayBlock) {
+  //   debugPrint(block.name);
+  // }
+  // debugPrint('______________');
+
+  // for(DisplayGroup group in displayGroup) {
+  //   debugPrint(group.name);
+  // }
+  // debugPrint('______________');
+
+  // for(Student student in dataStudent) {
+  //   debugPrint('${student.name} ${student.group.name}');
+  // }
+  // debugPrint('+++++++++++++++++++++++');
 
   runApp(const MyApp());
 }

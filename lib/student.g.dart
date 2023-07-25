@@ -22,8 +22,8 @@ class StudentAdapter extends TypeAdapter<Student> {
       name: fields[2] as String,
       sex: fields[3] as String,
       homeTown: fields[4] as String,
-      group: fields[5] as Group,
-      block: fields[6] as Block,
+      group: fields[5] as String,
+      block: fields[6] as String,
     );
   }
 
