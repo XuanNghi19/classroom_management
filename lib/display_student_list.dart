@@ -191,7 +191,7 @@ class _DisplayStudentListState extends State<DisplayStudentList> {
                                       MaterialPageRoute(
                                         builder: (context) =>
                                             DisplayStudentDetail(
-                                          student: displayGroupDraft.studentList[index],
+                                          student: searchStudentWithId(displayGroupDraft.studentList[index].id),
                                         ),
                                       ),
                                     );

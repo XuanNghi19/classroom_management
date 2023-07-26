@@ -8,13 +8,13 @@ import 'block.dart';
 void setStudent() {
   Map<String, List<Student>> studentMap = {};
   for (Student student in dataStudent) {
-    studentMap.putIfAbsent(student.name, () => []);
-    studentMap[student.name]!.add(student);
+    studentMap.putIfAbsent(student.group, () => []);
+    studentMap[student.group]!.add(student);
   }
 
   for (DisplayGroup group in displayGroup) {
     group.studentList.clear();
-    group.studentList.addAll(studentMap[group.name]!);
+    studentMap[group.name] != null ? group.studentList.addAll(studentMap[group.name]!) : null;
   }
 }
 
@@ -43,18 +43,21 @@ void setBlock() {
 
 Future<void> setLocalBlockData () async {
   final localBlockData = await Hive.openBox<Block>('localBlockData');
+  localBlockData.clear();
   localBlockData.addAll(dataBlock);
   localBlockData.close();
 }
 
 Future<void> setlocalGroupData () async {
   final localGroupData = await Hive.openBox<Group>('localGroupData');
+  localGroupData.clear();
   localGroupData.addAll(dataGroup);
   localGroupData.close();
 }
 
 Future<void> setlocalStudentData () async {
-  final localStudentData = await Hive.openBox<Student>('localStudentData');
+  final localStudentData = await Hive.openBox<Student>('localStudentData1');
+  localStudentData.clear();
   localStudentData.addAll(dataStudent);
   localStudentData.close();
 }
@@ -69,4 +72,10 @@ void removeStudentFromListType(List<Student> studentList, int id) {
 void removeStudentFromDataStudent(int id) {
   int tmpIndex = dataStudent.indexWhere((element) => element.id == id);
   dataStudent.removeAt(tmpIndex);
+  setlocalStudentData();
+}
+
+Student searchStudentWithId(int id) {
+  int tmpIndex = dataStudent.indexWhere((element) => element.id == id);
+  return dataStudent[tmpIndex];
 }

@@ -1,7 +1,6 @@
 import 'dart:typed_data';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:flutter/material.dart';
-import 'package:scm/display_data.dart';
 import 'student.dart';
 import 'modulus.dart';
 import 'group.dart';
@@ -16,8 +15,6 @@ class DisplayStudentDetail extends StatefulWidget {
 class _DisplayStudentDetailState extends State<DisplayStudentDetail> {
   final _formKey = GlobalKey<FormState>();
   final boxDefault = Hive.box('boxDefault');
-
-
 
   @override
   Widget build(BuildContext context) {

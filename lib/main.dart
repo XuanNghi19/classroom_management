@@ -21,7 +21,7 @@ Future<void> main() async {
   final localGroupData = await Hive.openBox<Group>('localGroupData');
 
   Hive.registerAdapter(StudentAdapter());
-  final localStudentData = await Hive.openBox<Student>('localStudentData');
+  final localStudentData = await Hive.openBox<Student>('localStudentData1');
 
   // localBlockData.clear();
   // localGroupData.clear();
@@ -61,9 +61,9 @@ Future<void> main() async {
   };
   debugPrint('*********************');
 
-  localBlockData.close;
-  localGroupData.close;
-  localStudentData.close;
+  // localBlockData.close;
+  // localGroupData.close;
+  // localStudentData.close;
 
   setBlock();
   setStudent();

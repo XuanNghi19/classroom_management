@@ -1,0 +1,32 @@
+USE => :
+
+- localBlockData(typeId = 2) : {
+  name: fields[0] as String,
+}
+
+- localGroupData(typeId = 1) : {
+  name: fields[0] as String,
+  block: fields[1] as Block,
+}
+
+- localStudentData1(typeId = 0) : {
+  id: fields[0] as int,
+  imageFile: fields[1] as Uint8List?,
+  name: fields[2] as String,
+  sex: fields[3] as String,
+  homeTown: fields[4] as String,
+  group: fields[5] as String,
+  block: fields[6] as String,
+}
+
+TRASH => :
+
+- localStudentData1(typeId = 0) : {
+  id: fields[0] as int,
+  imageFile: fields[1] as Uint8List?,
+  name: fields[2] as String,
+  sex: fields[3] as String,
+  homeTown: fields[4] as String,
+  group: fields[5] as Group,
+  block: fields[6] as Block,
+}
