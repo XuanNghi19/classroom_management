@@ -1,9 +1,15 @@
+import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:scm/group.dart';
-
 import 'student.dart';
 import 'display_data.dart';
 import 'block.dart';
+import 'package:image_picker/image_picker.dart';
+
+final localBlockData = Hive.box<Block>('localBlockData');
+final localGroupData = Hive.box<Group>('localGroupData');
+final localStudentData = Hive.box<Student>('localStudentData1');
 
 void setStudent() {
   Map<String, List<Student>> studentMap = {};
@@ -41,29 +47,40 @@ void setBlock() {
   );
 }
 
-Future<void> setLocalBlockData () async {
-  final localBlockData = await Hive.openBox<Block>('localBlockData');
+void setLocalBlockData () async {
   localBlockData.clear();
   localBlockData.addAll(dataBlock);
-  localBlockData.close();
 }
 
-Future<void> setlocalGroupData () async {
-  final localGroupData = await Hive.openBox<Group>('localGroupData');
+void setlocalGroupData () async {
   localGroupData.clear();
-  localGroupData.addAll(dataGroup);
-  localGroupData.close();
+  localGroupData.addAll(dataGroup);;
 }
 
-Future<void> setlocalStudentData () async {
-  final localStudentData = await Hive.openBox<Student>('localStudentData1');
+void setlocalStudentData () async {
+  // for(int i = 0; i < dataStudent.length; i++) {
+  //   debugPrint('${dataStudent[i].name} ${dataStudent[i].group}');
+  // }
+  // debugPrint('___________');
   localStudentData.clear();
   localStudentData.addAll(dataStudent);
-  localStudentData.close();
+  // for(int i = 0; i < localStudentData.length; i++) {
+  //   debugPrint('${localStudentData.getAt(i)!.name} ${localStudentData.getAt(i)!.group}');
+  // }
+  // debugPrint('**********');
 }
 
-void removeStudentFromListType(List<Student> studentList, int id) {
+void removelocalStudentData (int index) async {
+  // for(int i = 0; i < localStudentData.length; i++) {
+  //   debugPrint('${localStudentData.getAt(i)!.name} ${localStudentData.getAt(i)!.group}');
+  // }
+  // debugPrint('+++++++++');
+  localStudentData.delete(index);
+}
+
+void removeStudentFromListGroup(List<Student> studentList, int id) {
   removeStudentFromDataStudent(id);
+
 
   int tmpIndex = studentList.indexWhere((element) => element.id == id);
   studentList.removeAt(tmpIndex);
@@ -71,8 +88,8 @@ void removeStudentFromListType(List<Student> studentList, int id) {
 
 void removeStudentFromDataStudent(int id) {
   int tmpIndex = dataStudent.indexWhere((element) => element.id == id);
+  removelocalStudentData(tmpIndex);
   dataStudent.removeAt(tmpIndex);
-  setlocalStudentData();
 }
 
 Student searchStudentWithId(int id) {

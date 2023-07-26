@@ -15,7 +15,7 @@ class DisplayStudentList extends StatefulWidget {
 class _DisplayStudentListState extends State<DisplayStudentList> {
 
   final boxDefault = Hive.box('boxDefault');
-  
+
   @override
   Widget build(BuildContext context) {
   
@@ -171,7 +171,7 @@ class _DisplayStudentListState extends State<DisplayStudentList> {
                                               Navigator.pop(context),
                                               setState(
                                                 () {
-                                                  removeStudentFromListType(displayGroupDraft.studentList, displayGroupDraft.studentList[index].id);
+                                                  removeStudentFromListGroup(displayGroupDraft.studentList, displayGroupDraft.studentList[index].id);
                                                 },
                                               ),
                                             },

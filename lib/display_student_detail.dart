@@ -1,9 +1,11 @@
-import 'dart:typed_data';
+import 'dart:io';
+import 'package:flutter/services.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:flutter/material.dart';
 import 'student.dart';
 import 'modulus.dart';
 import 'group.dart';
+import 'package:image_picker/image_picker.dart';
 
 class DisplayStudentDetail extends StatefulWidget {
   const DisplayStudentDetail({super.key, required this.student});
@@ -15,9 +17,35 @@ class DisplayStudentDetail extends StatefulWidget {
 class _DisplayStudentDetailState extends State<DisplayStudentDetail> {
   final _formKey = GlobalKey<FormState>();
   final boxDefault = Hive.box('boxDefault');
+  Uint8List? imagee;
 
   @override
   Widget build(BuildContext context) {
+    Student student = widget.student;
+    student.imageFile != null ? imagee = Uint8List.fromList(student.imageFile!) : null;
+
+    Future pickImage(ImageSource source) async {
+      try {
+        final image = await ImagePicker().pickImage(source: source);
+        if (image == null) {
+          return;
+        }
+
+        // Xfile -> File
+        final imageTemporary = File(image.path);
+        // File -> Uint8List?
+        Uint8List? img = await imageTemporary.readAsBytes();
+
+        setState(() {
+          debugPrint(img.toString());
+          debugPrint(imagee.toString());
+          imagee = img;
+        });
+      } on PlatformException catch (e) {
+        debugPrint('Failed to pick image: $e');
+      }
+    }
+
     List<DropdownMenuItem<String>> groups = dataGroup.map((group) {
       return DropdownMenuItem(
         value: group.name,
@@ -25,7 +53,6 @@ class _DisplayStudentDetailState extends State<DisplayStudentDetail> {
       );
     }).toList();
 
-    Student student = widget.student;
     Uint8List defaultImage = boxDefault.get('imageProfileDefaut');
 
     return Scaffold(
@@ -58,19 +85,32 @@ class _DisplayStudentDetailState extends State<DisplayStudentDetail> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.black),
-                        borderRadius: BorderRadius.circular(5),
-                        image: DecorationImage(
-                          image: student.imageFile != null
-                              ? MemoryImage(student.imageFile!)
-                              : MemoryImage(defaultImage),
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                      height: 100,
-                      width: 70,
+                    Stack(
+                      children: [
+                        ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              padding: const EdgeInsets.all(0),
+                            ),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                border: Border.all(color: Colors.black),
+                                borderRadius: BorderRadius.circular(5),
+                                image: DecorationImage(
+                                  image: imagee != null
+                                      ? MemoryImage(imagee!)
+                                      : MemoryImage(defaultImage),
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                              height: 100,
+                              width: 70,
+                            ),
+                            onPressed: () async {
+                              debugPrint('aaa ${imagee.toString()}');
+                              await pickImage(ImageSource.gallery);
+                              debugPrint(imagee.toString());
+                            }),
+                      ],
                     ),
                     const SizedBox(width: 15),
                     Column(
@@ -133,7 +173,6 @@ class _DisplayStudentDetailState extends State<DisplayStudentDetail> {
                                     fontStyle: FontStyle.italic,
                                   ),
                                 ),
-                                
                                 DropdownButtonFormField(
                                   value: student.group,
                                   items: groups,
@@ -189,6 +228,7 @@ class _DisplayStudentDetailState extends State<DisplayStudentDetail> {
                           TextButton(
                             onPressed: () {
                               Navigator.pushNamed(context, 'DisplayClassList');
+                              student.imageFile = imagee;
                               _formKey.currentState!.save();
                               setStudent();
                               setGroup();

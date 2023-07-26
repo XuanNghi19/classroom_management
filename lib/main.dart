@@ -33,37 +33,33 @@ Future<void> main() async {
     dataBlock.clear(),
     dataBlock.addAll(localBlockData.values),
     
-    for(Block block in dataBlock) {
-      debugPrint(block.name),
-    }
+    // for(Block block in dataBlock) {
+    //   debugPrint(block.name),
+    // }
   };
-  debugPrint('______________');
+  // debugPrint('______________');
   
   localGroupData.isEmpty ? {
     localGroupData.addAll(dataGroup),
   } : {
     dataGroup.clear(),
     dataGroup.addAll(localGroupData.values),
-    for(Group group in dataGroup) {
-      debugPrint(group.name),
-    }
+    // for(Group group in dataGroup) {
+    //   debugPrint(group.name),
+    // }
   };
-  debugPrint('______________');
+  // debugPrint('______________');
   
   localStudentData.isEmpty ? {
     localStudentData.addAll(dataStudent),
   } : {
     dataStudent.clear(),
     dataStudent.addAll(localStudentData.values),
-    for(Student student in dataStudent) {
-      debugPrint(student.name),
-    }
+    // for(Student student in dataStudent) {
+    //   debugPrint(student.name),
+    // }
   };
-  debugPrint('*********************');
-
-  // localBlockData.close;
-  // localGroupData.close;
-  // localStudentData.close;
+  // debugPrint('*********************');
 
   setBlock();
   setStudent();
