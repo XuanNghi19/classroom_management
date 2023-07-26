@@ -1,11 +1,8 @@
-import 'package:flutter/foundation.dart';
-import 'package:flutter/services.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:scm/group.dart';
 import 'student.dart';
 import 'display_data.dart';
 import 'block.dart';
-import 'package:image_picker/image_picker.dart';
 
 final localBlockData = Hive.box<Block>('localBlockData');
 final localGroupData = Hive.box<Group>('localGroupData');
@@ -54,7 +51,7 @@ void setLocalBlockData () async {
 
 void setlocalGroupData () async {
   localGroupData.clear();
-  localGroupData.addAll(dataGroup);;
+  localGroupData.addAll(dataGroup);
 }
 
 void setlocalStudentData () async {
